@@ -19,5 +19,12 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DubFriend/paginator/issues"
+  },
+  "dependencies": {
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.2",
+    "grunt": "~0.4.2"
   }
 }
