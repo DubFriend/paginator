@@ -26,6 +26,19 @@ paginator = require('paginator')({
             done(8);
         }
     },
+    //only necessary if only using "getAll" method,
+    //if not using "getAll" then "all" is not necessary
+    all: function (start, numberOfResults, done, error) {
+        if(start > 8 || throwCountError) {
+            error({ message: 'test all error' });
+        }
+        else {
+            done({
+                results: _.range(8).splice(start, numberOfResults),
+                count: 8
+            });
+        }
+    },
     resultsPerPage: 3
 });
 ```
@@ -55,7 +68,20 @@ paginator.getNumberOfPages(
 );
 ```
 
-Both methods can alternatively be used with Q promises
+###promise getAll(pageNumber, successCallback, errorCallback)
+```javascript
+paginator.getAll(
+    1,
+    function (results) {
+        test.deepEqual(results, { results: [0, 1, 2], numberOfPages: 3 });
+    },
+    function (err) {
+        test.deepEqual(err, { message: 'test all error' });
+    }
+);
+```
+
+All methods can alternatively be used with Q promises
 ```javascript
 paginator.getPage(1)
 .then(function (results) {

@@ -41,6 +41,31 @@ module.exports = function (fig) {
                 }
             );
             return deferred.promise;
+        },
+
+        getAll: function (pageNumber, success, error) {
+            var deferred = Q.defer();
+            fig.all(
+                fig.resultsPerPage * (pageNumber - 1),
+                fig.resultsPerPage,
+                function getAllDone (results) {
+                    var finalResults = {
+                        results: results.results,
+                        numberOfPages: Math.ceil(results.count / fig.resultsPerPage)
+                    };
+                    if(success) {
+                        success(finalResults);
+                    }
+                    deferred.resolve(finalResults);
+                },
+                function getAllError (err) {
+                    if(error) {
+                        error(err);
+                    }
+                    deferred.reject(err);
+                }
+            );
+            return deferred.promise;
         }
     };
 };

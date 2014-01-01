@@ -5,9 +5,7 @@ exports.paginator = {
         paginator = require('./paginator')({
             get: function (start, numberOfResults, done, error) {
                 if(start > 8) {
-                    error({
-                        message: 'test getPage error'
-                    });
+                    error({ message: 'test getPage error' });
                 }
                 else {
                     done(_.range(8).splice(start, numberOfResults));
@@ -21,6 +19,17 @@ exports.paginator = {
                 }
                 else {
                     done(8);
+                }
+            },
+            all: function (start, numberOfResults, done, error) {
+                if(start > 8) {
+                    error({ message: 'test all error' });
+                }
+                else {
+                    done({
+                        results: _.range(8).splice(start, numberOfResults),
+                        count: 8
+                    });
                 }
             },
             resultsPerPage: 3
@@ -118,6 +127,38 @@ exports.paginator = {
         throwCountError = true;
         paginator.getNumberOfPages(undefined, function (err) {
             test.deepEqual(err, { message: 'test getNumberOfPages error' });
+            test.done();
+        });
+    },
+
+    testGetAll: function (test) {
+        test.expect(1);
+        paginator.getAll(1).then(function (results) {
+            test.deepEqual(results, { results: [0, 1, 2], numberOfPages: 3 });
+            test.done();
+        });
+    },
+
+    testGetAllCallback: function (test) {
+        test.expect(1);
+        paginator.getAll(1, function (results) {
+            test.deepEqual(results, { results: [0, 1, 2], numberOfPages: 3 });
+            test.done();
+        });
+    },
+
+    testGetAllError: function (test) {
+        test.expect(1);
+        paginator.getAll(4).catch(function (err) {
+            test.deepEqual(err, { message: 'test all error' });
+            test.done();
+        });
+    },
+
+    testGetAllErrorCallback: function (test) {
+        test.expect(1);
+        paginator.getAll(4, undefined, function (err) {
+            test.deepEqual(err, { message: 'test all error' });
             test.done();
         });
     }
