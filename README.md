@@ -1,6 +1,8 @@
 #Paginator
 ##Pagination facade for node
 
+install via npm `npm install --save paginatorjs`
+
 ###Create a paginator object.
 ```javascript
 paginator = require('paginator')({

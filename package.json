@@ -1,5 +1,5 @@
 {
-  "name": "paginator",
+  "name": "paginatorjs",
   "version": "0.0.0",
   "description": "paginator facade for node",
   "main": "paginator.js",
