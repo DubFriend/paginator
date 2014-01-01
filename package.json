@@ -1,0 +1,23 @@
+{
+  "name": "paginator",
+  "version": "0.0.0",
+  "description": "paginator mixin",
+  "main": "paginator.js",
+  "scripts": {
+    "test": "nodeunit test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DubFriend/paginator"
+  },
+  "keywords": [
+    "pagination",
+    "node",
+    "express"
+  ],
+  "author": "Brian Detering <BDeterin@gmail.com> (http://www.briandetering.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DubFriend/paginator/issues"
+  }
+}
